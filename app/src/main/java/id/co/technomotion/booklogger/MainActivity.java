@@ -21,7 +21,7 @@ import java.util.*;
 public class MainActivity extends ActionBarActivity {
     Button btnSimpan;
     ListView listViewBook;
-    EditText editTextInput;
+    EditText editTextInput, editTextAuthor, editTextPage;
 
     //menginisiasi arraylist yang akan digunakan untuk menyimpan daftar judul buku
     //ArrayList<String> listOfBook=new ArrayList<>();
@@ -38,10 +38,13 @@ public class MainActivity extends ActionBarActivity {
 
         listViewBook= (ListView) findViewById(R.id.listView_output);
         editTextInput= (EditText) findViewById(R.id.editText_input);
+        editTextAuthor= (EditText) findViewById(R.id.editText_Author);
+        editTextPage= (EditText) findViewById(R.id.editText_Page);
         btnSimpan= (Button) findViewById(R.id.btn_simpan);
 
         //menyiapkan data
         listOfBook.add(new DataBuku("Laskar Pelangi", "Andrea Hirata", "15"));
+        listOfBook.add(new DataBuku("5 cm", "Andrea Pirlo", "150"));
 
         //listOfBook.add("5 cm");
         //listOfBook.add("Ayat ayat cinta");
@@ -49,7 +52,9 @@ public class MainActivity extends ActionBarActivity {
         //listOfBook.add("Tutorial Pemrograman Android");
 
         //meng-inisiasi arrayadapter
-        adapter=new ArrayAdapter<DataBuku>(this,android.R.layout.simple_list_item_1,listOfBook);
+        //adapter=new ArrayAdapter<DataBuku>(this,android.R.layout.simple_list_item_1,listOfBook);
+        ListBookAdapter adapter = new ListBookAdapter(this, listOfBook);
+
         listViewBook.setAdapter(adapter);
 
         //mengaktifkan fungsi onItemClickListener dan onItemLongClickListener
@@ -68,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
                 //something happen
                 String longClickedItem= (String) parent.getAdapter().getItem(position);
                 Log.d("booklogger",longClickedItem);
-                el(longClickedItem);
+                showDeleteDialog(longClickedItem);
                 return false;
             }
         });
@@ -79,12 +84,19 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //something happen if user click this button
                 String title=editTextInput.getText().toString();
+                String author = editTextAuthor.getText().toString();
+                String page = editTextPage.getText().toString();
+
                 // dilakukan check untuk memastikan bahwa user telah menulis judul buku
                 if(!title.isEmpty()){
+
                     // menambahkan judul buku kedalam listOfBook
-                    listOfBook.add(title);
+                    listOfBook.add(new DataBuku(title, author, page));
+
                     // meng-update listview
-                    adapter.notifyDataSetChanged();
+                    // belum bisa
+                    //adapter.notifyDataSetChanged();
+
                     // clear edittext
                     editTextInput.setText("");
                 }else{

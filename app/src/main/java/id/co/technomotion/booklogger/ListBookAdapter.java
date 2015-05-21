@@ -66,10 +66,10 @@ public class ListBookAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        DataBuku car = listBook.get(position);
-        holder.txtTitle.setText(car.getTitle());
-        holder.txtAuthor.setText(car.getAuthor());
-        holder.txtPage.setText(car.getPage());
+        DataBuku book = listBook.get(position);
+        holder.txtTitle.setText(book.getTitle());
+        holder.txtAuthor.setText("Nama pengarang: "+book.getAuthor());
+        holder.txtPage.setText("Jumlah halaman: "+book.getPage());
 
         return convertView;
     }
