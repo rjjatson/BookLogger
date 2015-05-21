@@ -24,7 +24,9 @@ public class MainActivity extends ActionBarActivity {
     EditText editTextInput;
 
     //menginisiasi arraylist yang akan digunakan untuk menyimpan daftar judul buku
-    ArrayList<String> listOfBook=new ArrayList<>();
+    //ArrayList<String> listOfBook=new ArrayList<>();
+
+    ArrayList<DataBuku> listOfBook = new ArrayList<>();
 
     //mendeklarasikan arrayadapter
     ArrayAdapter<String> adapter;
@@ -39,14 +41,15 @@ public class MainActivity extends ActionBarActivity {
         btnSimpan= (Button) findViewById(R.id.btn_simpan);
 
         //menyiapkan data
-        listOfBook.add("Laskar Pelangi");
-        listOfBook.add("5 cm");
-        listOfBook.add("Ayat ayat cinta");
-        listOfBook.add("Lima Menara");
-        listOfBook.add("Tutorial Pemrograman Android");
+        listOfBook.add(new DataBuku("Laskar Pelangi", "Andrea Hirata", "15"));
+
+        //listOfBook.add("5 cm");
+        //listOfBook.add("Ayat ayat cinta");
+        //listOfBook.add("Lima Menara");
+        //listOfBook.add("Tutorial Pemrograman Android");
 
         //meng-inisiasi arrayadapter
-        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listOfBook);
+        adapter=new ArrayAdapter<DataBuku>(this,android.R.layout.simple_list_item_1,listOfBook);
         listViewBook.setAdapter(adapter);
 
         //mengaktifkan fungsi onItemClickListener dan onItemLongClickListener
@@ -65,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
                 //something happen
                 String longClickedItem= (String) parent.getAdapter().getItem(position);
                 Log.d("booklogger",longClickedItem);
-                showDeleteDialog(longClickedItem);
+                el(longClickedItem);
                 return false;
             }
         });
@@ -137,3 +140,6 @@ public class MainActivity extends ActionBarActivity {
         deleteDialog.show();
     }
 }
+
+
+
