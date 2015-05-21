@@ -27,4 +27,16 @@ public class DataBuku {
         return page;
     }
 
+    public  void SetJudulBuku(String judulBuku){
+        this.title = judulBuku;
+    }
+
+    public void SetPengarang(String namaPengarang){
+        this.author = namaPengarang;
+    }
+
+    public void SetHalaman(String jumlahHalaman){
+        this.page = jumlahHalaman;
+    }
+
 }
